@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CardComponent } from "../../components/card/card";
-import { I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, UpperCasePipe } from '@angular/common';
+import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, UpperCasePipe } from '@angular/common';
 
 const client1 = {
   name: 'Uriel',
@@ -18,22 +18,30 @@ const client2 = {
 
 @Component({
   selector: 'app-uncommon-page',
-  imports: [CardComponent, I18nSelectPipe, I18nPluralPipe, SlicePipe, JsonPipe, UpperCasePipe, KeyValuePipe],
+  imports: [
+    AsyncPipe,
+    CardComponent,
+    I18nSelectPipe,
+    I18nPluralPipe,
+    SlicePipe,
+    JsonPipe,
+    UpperCasePipe,
+    KeyValuePipe,
+  ],
   templateUrl: './uncommon-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UncommonPage {
-
   // i18Select
   client = signal(client1);
 
   invitationMap = {
     male: 'invitarlo',
-    female: 'invitarla'
-  }
+    female: 'invitarla',
+  };
 
   changeClient() {
-    if( this.client() == client1) {
+    if (this.client() == client1) {
       this.client.set(client2);
       return;
     }
@@ -47,7 +55,7 @@ export default class UncommonPage {
     '=1': 'tenemos un cliente esperando',
     '=2': 'tenemos 2 clientes esperando',
     other: 'tenemos # clientes esperando',
-  })
+  });
   clients = signal([
     'Ana',
     'Yuri',
@@ -57,18 +65,25 @@ export default class UncommonPage {
     'Julieta',
     'Natalia',
     'Danna',
-    'Belinda'
-  ])
+    'Belinda',
+  ]);
 
   deleteClient() {
-    this.clients.update(prev => prev.slice(1))
+    this.clients.update((prev) => prev.slice(1));
   }
 
   // KeyValuePipe
   profile = {
     name: 'Uriel',
     age: 30,
-    address: 'Nuevo Leon, México'
-  }
+    address: 'Nuevo Leon, México',
+  };
 
+  // Async Pipe
+  promiseValue: Promise<string> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Tenemos data en la promesa');
+      console.log('Promesa finalizada');
+    }, 3500);
+  })
 }

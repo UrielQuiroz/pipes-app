@@ -13,10 +13,11 @@
     </button>
   </app-card>
 
+  <!-- [disabled]="clients().length == 0" -->
+
   <app-card title="i18nSelectPluralPipe">
     <p>Actualmente {{ clients().length | i18nPlural: clientsMap() }}</p>
     <button
-          [disabled]="clients().length == 0"
       (click)="deleteClient()"
       class="btn btn-primary">
       Borrar cliente
@@ -63,5 +64,16 @@
         </li>
       }
     </ul>
+  </app-card>
+
+  <app-card title="AsyncPipe">
+    <p>{{ promiseValue | async }}</p>
+    @if ( promiseValue | async; as value ) {
+      <p class="text-primary">{{ value }}</p>
+    }
+
+    @else {
+      <p class="text-accent">Espere por favor...</p>
+    }
   </app-card>
 </div>
