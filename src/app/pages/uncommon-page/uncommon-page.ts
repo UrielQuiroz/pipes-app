@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CardComponent } from "../../components/card/card";
 
 @Component({
   selector: 'app-uncommon-page',
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './uncommon-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
