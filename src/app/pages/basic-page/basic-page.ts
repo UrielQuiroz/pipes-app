@@ -34,7 +34,6 @@ export default class BasicPage {
   })
 
   changeLocale(locale: AvailableLocale) {
-    console.log({ locale })
     this.localeService.changeLocale(locale);
   }
 }

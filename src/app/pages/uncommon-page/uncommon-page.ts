@@ -84,13 +84,11 @@ export default class UncommonPage {
   promiseValue: Promise<string> = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('Tenemos data en la promesa');
-      console.log('Promesa finalizada');
     }, 3500);
   })
 
   myObservableTimer = interval(2000)
     .pipe(
-      map(value =>  value + 1),
-      tap((value) => console.log('tap', value))
+      map(value =>  value + 1)
     )
 }
